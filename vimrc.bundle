@@ -1,0 +1,92 @@
+"
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+call plug#begin('~/.vim/plugged')
+
+""""""""""""""""colorful pairs""""""""
+Plug 'luochen1990/rainbow'
+Plug 'jiangmiao/auto-pairs'
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle"
+"""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""search file""""""""""""
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_ShortcutB = '<Leader>bo'
+let g:Lf_DefaultExternalTool = "ag"
+" let g:Lf_UseVersionControlTool = "git ls-files"
+let g:Lf_CommandMap = {'<C-C>': ['<Esc>', '<C-C>']}
+let g:Lf_WindowHeight = 0.3
+let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+            \}
+let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+"""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""airline""""""""""""""""
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+"""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""nerdtree"""""""""""""""
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+" Ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$'] 
+Plug 'Xuyuanp/nerdtree-git-plugin', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+let g:nerdtree_tabs_open_on_gui_startup = 0
+map <silent> <F1> :NERDTreeToggle<cr>
+imap <silent> <F1> <Esc>:NERDTreeToggle<cr>
+map <silent> <leader>j :NERDTreeFind<cr>
+
+" Config netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3 " tree view
+let g:netrw_altv = 1 " open splits to the right
+let g:netrw_list_hide = netrw_gitignore#Hide()
+let g:netrw_list_hide = ',\(^\|\s\s\)\zs\.\S\+'
+"""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""fast comment""""""""""""""
+Plug 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims=1
+map <leader>/ <leader>c<space>
+"""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""snippets"""""""""""""""
+Plug 'SirVer/ultisnips', {'on': []}
+Plug 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""Lazyload func""""""""""""""""
+augroup plug_lazy_load
+    autocmd!
+    autocmd InsertEnter * call plug#load('ultisnips','vim-snippets')
+                \| autocmd! plug_lazy_load
+augroup END
+"""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""Python""""""""""""""""""""
+Plug 'vim-python/python-syntax'
+let g:python_highlight_all = 1
+"""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""GO""""""""""""""""""""
+Plug 'fatih/vim-go'
+"""""""""""""""""""""FE""""""""""""""""""""
+Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/javascript-libraries-syntax.vim'
+let g:used_javascript_libs = 'requirejs,vue,react,jquery'
+Plug 'othree/xml.vim', {'for': ['html', 'xml']}
+Plug 'chemzqm/vim-jsx-improve'
+"""""""""""""""""""""""""""""""""""""""""""
+
+" Initialize plugin system
+call plug#end()
+
